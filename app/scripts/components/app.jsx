@@ -8,12 +8,20 @@ var Todo = require('../models/todo.js').Todo;
 
 var AppComponent = React.createClass({
   getInitialState: function(){
-
     var todoCollection = new TodoCollection();
-    todoCollection.fetch();
+
     return {
       todoCollection: todoCollection,
     }
+  },
+
+  componentWillMount: function(){
+    var self = this;
+    var todoCollection = this.state.todoCollection;
+
+    todoCollection.fetch().then(function(){
+      self.setState({todoCollection: todoCollection});
+    })
   },
 
   addTodo: function(todo){
@@ -26,7 +34,7 @@ var AppComponent = React.createClass({
     todoCollection.fetch().then(function(){
       self.setState({todoCollection: todoCollection});
     });
-    console.log(self.state.todoCollection);
+    // console.log(self.state.todoCollection);
   },
 
   render: function(){
