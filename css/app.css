@@ -3,4 +3,11 @@
 
 .todo-form button {
   margin-top: 1rem; }
+
+.status {
+  width: 350px; }
+
+.delete {
+  background-color: red; }
+
 /*# sourceMappingURL=app.css.map */
