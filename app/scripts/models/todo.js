@@ -2,7 +2,13 @@ var Backbone = require('backbone');
 
 
 var Todo = Backbone.Model.extend({
-  idAttribute: 'objectId'
+  idAttribute: 'objectId',
+  save: function(key, val, options){
+   delete this.attributes.createdAt;
+   delete this.attributes.updatedAt;
+
+   return Backbone.Model.prototype.save.apply(this, arguments);
+ },
 });
 
 var TodoCollection = Backbone.Collection.extend({
