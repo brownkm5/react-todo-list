@@ -22,13 +22,17 @@ var FormComponent = React.createClass({
 
   handleAddTodo: function(e){
     e.preventDefault();
-    var currentTime = (new Date().getMonth() + 1) + "/" + new Date().getDate() + '/' + new Date().getFullYear();
+
+    var date = new Date();
+    var currentDate = (date.getMonth() + 1) + "/" + date.getDate() + '/' + date.getFullYear();
+    var currentTime = date.getHours() + ':' + date.getMinutes();
 
     var todo = {
       todoItem: this.state.todoItem,
       finishBy: this.state.finishBy,
       status: false,
-      dateAdded: currentTime
+      dateAdded: currentDate,
+      timeAdded: currentTime
     };
 
     this.props.addTodo(todo);

@@ -44,15 +44,18 @@ var TableComponent = React.createClass({
 
   render: function(){
     var self = this;
-    console.log(new Date().getDate());
+
     var todoCollection = this.state.todoCollection;
-    // console.log(todoCollection.models);
+
+    var date = new Date();
+    var today = (date.getMonth() + 1) + "/" + date.getDate() + '/' + date.getFullYear();
+    var yesterday = (date.getMonth() + 1) + "/" + (date.getDate() - 1)+ '/' + date.getFullYear();
+    
     var todoList = todoCollection.map(function(todo){
-      // console.log(todo.get('todoItem'));
       return (
         <tr key={todo.get('objectId')} className="todo-row">
           <td className="todo"><p>{todo.get('todoItem')}</p></td>
-          <td className="start">{todo.get('dateAdded')}</td>
+          <td className="start">{todo.get('dateAdded') === today ? `Today at ${todo.get('timeAdded')}`: todo.get('dateAdded') === yesterday ? `Yesterday at ${todo.get('timeAdded')}` :todo.get('dateAdded') + ' at ' + todo.get('timeAdded')}</td>
           <td className="finish">{todo.get('finishBy')}</td>
           {todo.get('status') ? <td className='status'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Nevermind</a> <a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn delete"><i className="material-icons">delete</i></a></td> : <td><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Incomplete</a></td>}
         </tr>
