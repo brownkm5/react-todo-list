@@ -49,15 +49,16 @@ var FormComponent = React.createClass({
       <div className="todo-form">
           <form onSubmit={this.handleAddTodo} className="col s12">
             <div className="row">
-              <div className="input-field col s4">
+              <div className="input-field col s6 m5">
                 <input onChange={this.handleTodo} placeholder="To do item" id="first_name" type="text" className="todo-input validate" value={this.state.todoItem} />
               </div>
-              <div className="input-field col s4">
+              <div className="input-field col s6 m5">
                 <input onChange={this.handleFinish} placeholder="Finish by" id="last_name" type="text" className="finish-by-input validate" value={this.state.finishBy} />
               </div>
-              <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+              <button className="hide-on-small-only btn waves-effect waves-light" type="submit" name="action">Submit
                 <i className="material-icons right">send</i>
               </button>
+              <button className="hide-on-med-and-up btn waves-effect waves-light" type="submit" name="action">Submit</button>
             </div>
           </form>
         </div>

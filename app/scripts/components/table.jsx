@@ -50,14 +50,15 @@ var TableComponent = React.createClass({
     var date = new Date();
     var today = (date.getMonth() + 1) + "/" + date.getDate() + '/' + date.getFullYear();
     var yesterday = (date.getMonth() + 1) + "/" + (date.getDate() - 1)+ '/' + date.getFullYear();
-    
+
     var todoList = todoCollection.map(function(todo){
       return (
         <tr key={todo.get('objectId')} className="todo-row">
           <td className="todo"><p>{todo.get('todoItem')}</p></td>
           <td className="start">{todo.get('dateAdded') === today ? `Today at ${todo.get('timeAdded')}`: todo.get('dateAdded') === yesterday ? `Yesterday at ${todo.get('timeAdded')}` :todo.get('dateAdded') + ' at ' + todo.get('timeAdded')}</td>
           <td className="finish">{todo.get('finishBy')}</td>
-          {todo.get('status') ? <td className='status'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Nevermind</a> <a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn delete"><i className="material-icons">delete</i></a></td> : <td><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Incomplete</a></td>}
+          {todo.get('status') ? <td className='status hide-on-small-only'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Nevermind</a> <a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn delete"><i className="material-icons">delete</i></a></td> : <td className='hide-on-small-only'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Incomplete</a></td>}
+          <td className='hide-on-med-and-up'><a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn mobile-delete delete"><i className="material-icons">delete</i></a></td>
         </tr>
       )
     });
@@ -69,7 +70,8 @@ var TableComponent = React.createClass({
               <th data-field="todo">To Do</th>
               <th data-field="start">Date Added</th>
               <th data-field="finish">Finish By</th>
-              <th data-field="status">Status</th>
+              <th className='hide-on-small-only' data-field="status">Status</th>
+              <th className='hide-on-med-and-up'>Delete</th>
           </tr>
         </thead>
         <tbody className="table-body">
