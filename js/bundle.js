@@ -106,15 +106,16 @@ var FormComponent = React.createClass({displayName: "FormComponent",
       React.createElement("div", {className: "todo-form"}, 
           React.createElement("form", {onSubmit: this.handleAddTodo, className: "col s12"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "input-field col s4"}, 
+              React.createElement("div", {className: "input-field col s6 m5"}, 
                 React.createElement("input", {onChange: this.handleTodo, placeholder: "To do item", id: "first_name", type: "text", className: "todo-input validate", value: this.state.todoItem})
               ), 
-              React.createElement("div", {className: "input-field col s4"}, 
+              React.createElement("div", {className: "input-field col s6 m5"}, 
                 React.createElement("input", {onChange: this.handleFinish, placeholder: "Finish by", id: "last_name", type: "text", className: "finish-by-input validate", value: this.state.finishBy})
               ), 
-              React.createElement("button", {className: "btn waves-effect waves-light", type: "submit", name: "action"}, "Submit", 
+              React.createElement("button", {className: "hide-on-small-only btn waves-effect waves-light", type: "submit", name: "action"}, "Submit", 
                 React.createElement("i", {className: "material-icons right"}, "send")
-              )
+              ), 
+              React.createElement("button", {className: "hide-on-med-and-up btn waves-effect waves-light", type: "submit", name: "action"}, "Submit")
             )
           )
         )
@@ -180,14 +181,15 @@ var TableComponent = React.createClass({displayName: "TableComponent",
     var date = new Date();
     var today = (date.getMonth() + 1) + "/" + date.getDate() + '/' + date.getFullYear();
     var yesterday = (date.getMonth() + 1) + "/" + (date.getDate() - 1)+ '/' + date.getFullYear();
-    
+
     var todoList = todoCollection.map(function(todo){
       return (
         React.createElement("tr", {key: todo.get('objectId'), className: "todo-row"}, 
           React.createElement("td", {className: "todo"}, React.createElement("p", null, todo.get('todoItem'))), 
           React.createElement("td", {className: "start"}, todo.get('dateAdded') === today ? `Today at ${todo.get('timeAdded')}`: todo.get('dateAdded') === yesterday ? `Yesterday at ${todo.get('timeAdded')}` :todo.get('dateAdded') + ' at ' + todo.get('timeAdded')), 
           React.createElement("td", {className: "finish"}, todo.get('finishBy')), 
-          todo.get('status') ? React.createElement("td", {className: "status"}, React.createElement("a", {onClick: function(){self.handleStatusChange(todo)}, className: "waves-effect waves-light btn"}, "Nevermind"), " ", React.createElement("a", {onClick: function(){self.handleDelete(todo)}, className: "waves-effect waves-light btn delete"}, React.createElement("i", {className: "material-icons"}, "delete"))) : React.createElement("td", null, React.createElement("a", {onClick: function(){self.handleStatusChange(todo)}, className: "waves-effect waves-light btn"}, "Incomplete"))
+          todo.get('status') ? React.createElement("td", {className: "status hide-on-small-only"}, React.createElement("a", {onClick: function(){self.handleStatusChange(todo)}, className: "waves-effect waves-light btn"}, "Nevermind"), " ", React.createElement("a", {onClick: function(){self.handleDelete(todo)}, className: "waves-effect waves-light btn delete"}, React.createElement("i", {className: "material-icons"}, "delete"))) : React.createElement("td", {className: "hide-on-small-only"}, React.createElement("a", {onClick: function(){self.handleStatusChange(todo)}, className: "waves-effect waves-light btn"}, "Incomplete")), 
+          React.createElement("td", {className: "hide-on-med-and-up"}, React.createElement("a", {onClick: function(){self.handleDelete(todo)}, className: "waves-effect waves-light btn mobile-delete delete"}, React.createElement("i", {className: "material-icons"}, "delete")))
         )
       )
     });
@@ -199,7 +201,8 @@ var TableComponent = React.createClass({displayName: "TableComponent",
               React.createElement("th", {"data-field": "todo"}, "To Do"), 
               React.createElement("th", {"data-field": "start"}, "Date Added"), 
               React.createElement("th", {"data-field": "finish"}, "Finish By"), 
-              React.createElement("th", {"data-field": "status"}, "Status")
+              React.createElement("th", {className: "hide-on-small-only", "data-field": "status"}, "Status"), 
+              React.createElement("th", {className: "hide-on-med-and-up"}, "Delete")
           )
         ), 
         React.createElement("tbody", {className: "table-body"}, 
