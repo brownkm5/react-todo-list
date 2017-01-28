@@ -62,7 +62,7 @@ var TableComponent = React.createClass({
           <td className="todo"><p>{todo.get('todoItem')}</p></td>
           <td className="start">{todo.get('dateAdded') === today ? `Today at ${todo.get('timeAdded')}`: todo.get('dateAdded') === yesterday ? `Yesterday at ${todo.get('timeAdded')}` :todo.get('dateAdded') + ' at ' + todo.get('timeAdded')}</td>
           <td className="finish">{todo.get('finishBy')}</td>
-          {todo.get('status') ? <td className='status hide-on-small-only'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Nevermind</a> <a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn delete"><i className="material-icons">delete</i></a></td> : <td className='hide-on-small-only'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Incomplete</a></td>}
+          {todo.get('status') ? <td className='status hide-on-small-only'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Finished</a> <a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn delete"><i className="material-icons">delete</i></a></td> : <td className='hide-on-small-only'><a onClick={function(){self.handleStatusChange(todo)}} className="waves-effect waves-light btn">Incomplete</a></td>}
           <td className='hide-on-med-and-up'><a onClick={function(){self.handleDelete(todo)}} className="waves-effect waves-light btn mobile-delete delete"><i className="material-icons">delete</i></a></td>
         </tr>
       )
