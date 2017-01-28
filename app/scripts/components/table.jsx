@@ -1,19 +1,23 @@
 var React = require('react');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var TodoCollection = require('../models/todo.js').TodoCollection;
 
 var TableComponent = React.createClass({
   getInitialState: function(){
     var todoCollection = this.props.todoCollection;
+    // var finishedCollection = this.props.finishedCollection;
 
     return {
       todoCollection: todoCollection,
-
+      // finishedCollection: finishedCollection
     }
   },
 
   componentWillReceiveProps: function(nextProps){
     this.setState({todoCollection: nextProps.todoCollection});
+    // this.setState({finishedCollection: nextProps.finishedCollection});
+    // console.log(this.state.finishedCollection);
   },
 
   // componentWillMount: function(){
@@ -40,11 +44,12 @@ var TableComponent = React.createClass({
     todo.destroy();
 
     this.setState({todoCollection: todoCollection});
+    // this.setState({finishedCollection: finishedCollection});
   },
 
   render: function(){
     var self = this;
-
+    // var finishedCollection = new TodoCollection
     var todoCollection = this.state.todoCollection;
 
     var date = new Date();
@@ -74,9 +79,16 @@ var TableComponent = React.createClass({
               <th className='hide-on-med-and-up'>Delete</th>
           </tr>
         </thead>
-        <tbody className="table-body">
+        <ReactCSSTransitionGroup
+          component="tbody"
+          transitionName="slide"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+        >
           {todoList}
-        </tbody>
+        </ReactCSSTransitionGroup>
 
       </table>
     )

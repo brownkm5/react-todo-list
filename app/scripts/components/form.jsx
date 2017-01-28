@@ -24,15 +24,18 @@ var FormComponent = React.createClass({
     e.preventDefault();
 
     var date = new Date();
+    var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+
     var currentDate = (date.getMonth() + 1) + "/" + date.getDate() + '/' + date.getFullYear();
-    var currentTime = date.getHours() + ':' + date.getMinutes();
+    var currentTime = date.getHours() > 12 ?  (date.getHours() - 12) + ':' + minutes + ' ' + 'pm' : date.getHours() + ':' + minutes + ' ' + 'am' ;
 
     var todo = {
       todoItem: this.state.todoItem,
       finishBy: this.state.finishBy,
       status: false,
       dateAdded: currentDate,
-      timeAdded: currentTime
+      timeAdded: currentTime,
+      finished: 'no'
     };
 
     this.props.addTodo(todo);

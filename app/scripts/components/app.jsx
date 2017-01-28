@@ -9,19 +9,25 @@ var Todo = require('../models/todo.js').Todo;
 var AppComponent = React.createClass({
   getInitialState: function(){
     var todoCollection = new TodoCollection();
-
+    // var finishedCollection = new TodoCollection();
     return {
       todoCollection: todoCollection,
+      // finishedCollection: finishedCollection
     }
   },
 
   componentWillMount: function(){
     var self = this;
     var todoCollection = this.state.todoCollection;
+    // var finishedCollection = this.state.finishedCollection;
 
     todoCollection.fetch().then(function(){
       self.setState({todoCollection: todoCollection});
-    })
+    });
+
+    // finishedCollection.status('finished').fetch().then(function(){
+    //   self.setState({finishedCollection: finishedCollection});
+    // });
   },
 
   addTodo: function(todo){
