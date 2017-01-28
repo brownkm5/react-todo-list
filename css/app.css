@@ -13,4 +13,46 @@
 .mobile-delete {
   padding: 0 10px; }
 
+/*animations*/
+/* start enter state */
+.slide-enter {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+/* end enter state */
+.slide-enter.slide-enter-active {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.5s ease-out;
+  transition: -webkit-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
+  transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+}
+
+/* start leave state */
+.slide-leave {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+/* end leave state */
+.slide-leave.slide-leave-active{
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  opacity: 0;
+  -webkit-transition: 0.5s ease-in;
+  transition: 0.5s ease-in;
+}
+
+/* initial mounting */
+.slide-appear {
+  opacity: 0;
+}
+.slide-appear.slide-appear-active {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+
 /*# sourceMappingURL=app.css.map */
